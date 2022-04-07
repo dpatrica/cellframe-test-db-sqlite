@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "random": "c",
+        "dap_common.h": "c"
+    }
+}

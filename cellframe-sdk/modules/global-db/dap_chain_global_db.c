@@ -540,8 +540,8 @@ void dap_global_db_obj_track_history(void* a_store_data)
             dap_db_history_add((char)l_obj->type, l_obj, 1, l_sync_group_item->group_name_for_history);
             unlock();
         } else {
-            DAP_DELETE(l_obj->key);
-            DAP_DEL_Z(l_obj->value);
+            DAP_DELETE(l_obj->key);// <--------- comment this for database test
+            DAP_DEL_Z(l_obj->value);// <--------- comment this for database test
         }
     } else { // looking for extra group
         sync_group_item_t *l_sync_extra_group_item = find_item_by_mask(s_sync_group_extra_items, l_obj->group);
@@ -556,12 +556,12 @@ void dap_global_db_obj_track_history(void* a_store_data)
                 dap_db_history_add((char)l_obj->type, l_obj, 1, l_sync_extra_group_item->group_name_for_history);
                 unlock();
             } else {
-                DAP_DELETE(l_obj->key);
-                DAP_DEL_Z(l_obj->value);
+                DAP_DELETE(l_obj->key);// <--------- comment this for database test
+                DAP_DEL_Z(l_obj->value);// <--------- comment this for database test
             }
         } else {
-            DAP_DELETE(l_obj->key);
-            DAP_DEL_Z(l_obj->value);
+            DAP_DELETE(l_obj->key);// <--------- comment this for database test
+            DAP_DEL_Z(l_obj->value);// <--------- comment this for database test
         }
     }
 }

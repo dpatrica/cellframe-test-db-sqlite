@@ -882,7 +882,11 @@ dap_chain_node_cmd_item_t* dap_chain_node_cli_cmd_find(const char *a_name)
     return l_cmd_item;
 }
 
-int test_db(int argc, char ** argv, char ** a_str_reply);//TODO: test DB!!!
+/* _________________ TEST _________________*/
+
+int test_db(int argc, char ** argv, char ** a_str_reply);
+
+/* _________________ TEST _________________*/
 
 /**
  * @brief dap_chain_node_cli_init

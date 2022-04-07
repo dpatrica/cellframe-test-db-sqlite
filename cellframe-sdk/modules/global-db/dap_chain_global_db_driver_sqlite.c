@@ -677,9 +677,7 @@ int dap_db_driver_sqlite_apply_store_obj(dap_store_obj_t *a_store_obj)
     else if (a_store_obj->type == 'd') {
         //delete one record
         if (a_store_obj->key) {
-            // dap_store_obj_t *l_obj = (dap_store_obj_t *)a_store_obj;
-            // sync_group_item_t *l_sync_group_item = find_item_by_mask(s_sync_group_items, a_store_obj->group);
-            // if (check_hash(a_store_obj)) {
+            // if (check_hash(a_store_obj)) {   /* <<---for use with synchronized tables only */
             l_query = sqlite3_mprintf("update '%s' set key = NULL, ts = NULL, value = NULL where key = '%s'",
                                     l_table_name, a_store_obj->key);
             // }

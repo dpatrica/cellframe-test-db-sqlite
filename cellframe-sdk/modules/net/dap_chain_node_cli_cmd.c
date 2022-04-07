@@ -1630,7 +1630,6 @@ int com_help(int argc, char ** argv, char **str_reply)
     } else {
         // TODO Read list of commands & return it
         log_it(L_DEBUG, "General help requested");
-        write(1, "KEK\n", 4);
         dap_string_t * l_help_list_str = dap_string_new(NULL);
         dap_chain_node_cmd_item_t *l_cmd = dap_chain_node_cli_cmd_get_first();
         while(l_cmd) {

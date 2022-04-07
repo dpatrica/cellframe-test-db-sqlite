@@ -504,6 +504,13 @@ static sync_group_item_t *find_item_by_mask(sync_group_item_t *a_items, const ch
 
 /* _________________ TEST _________________*/
 
+/**
+ * @brief Function checks if table exists in s_sync_group_items or s_sync_group_extra_items
+ *        Special for function "dap_db_driver_sqlite_apply_store_obj" (not used)
+ * 
+ * @param a_store_obj a pointer to an object with the name of the table (->group)
+ * @return true or false
+ */
 bool check_hash(dap_store_obj_t *a_store_obj)
 {
     sync_group_item_t *l_sync_group_item;

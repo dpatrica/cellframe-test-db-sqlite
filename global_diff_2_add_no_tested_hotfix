@@ -1,0 +1,38 @@
+diff --git a/cellframe-sdk/modules/global-db/dap_chain_global_db_driver_sqlite.c b/cellframe-sdk/modules/global-db/dap_chain_global_db_driver_sqlite.c
+index bb90aae..a29dc8b 100644
+--- a/cellframe-sdk/modules/global-db/dap_chain_global_db_driver_sqlite.c
++++ b/cellframe-sdk/modules/global-db/dap_chain_global_db_driver_sqlite.c
+@@ -678,12 +678,21 @@ int dap_db_driver_sqlite_apply_store_obj(dap_store_obj_t *a_store_obj)
+         //delete one record
+         if (a_store_obj->key) {
+             // if (check_hash(a_store_obj)) {   /* <<---for use with synchronized tables only */
+-            l_query = sqlite3_mprintf("update '%s' set key = NULL, ts = NULL, value = NULL where key = '%s'",
++            // dap_store_obj_t *temp_obj = dap_db_driver_sqlite_read_last_store_obj(a_store_obj->group); /* <<---to delete everything but the last object (not yet tested) */
++            // if (temp_obj && !memcmp(temp_obj->key, a_store_obj->key, max(dap_strlen(temp_obj->key), dap_strlen(a_store_obj->key)))) {
++                l_query = sqlite3_mprintf("update '%s' set key = NULL, ts = NULL, value = NULL where key = '%s'",
+                                     l_table_name, a_store_obj->key);
+             // }
++            // else if (temp_obj) {
++                // l_query = sqlite3_mprintf("delete from '%s' where key = '%s'",
++                                    // l_table_name, a_store_obj->key);
++            // }
+             // else {
+-            // l_query = sqlite3_mprintf("delete from '%s' where key = '%s'",
+-                                    //   l_table_name, a_store_obj->key);
++                // log_it(L_INFO, "Table not found");
++            // }
++            // if (temp_obj) {
++                // DAP_DEL_Z(temp_obj->value);
++                // DAP_DELETE(temp_obj);
+             // }
+         } else {
+             // remove all group
+@@ -743,7 +752,7 @@ int dap_db_driver_sqlite_apply_store_obj(dap_store_obj_t *a_store_obj)
+         l_ret = dap_db_driver_sqlite_exec(s_db, l_query_del_null, &l_error_message);
+         dap_db_driver_sqlite_free(l_query_del_null);
+         if(l_ret != SQLITE_OK) {
+-            log_it(L_INFO, "Can't delete NULL base %s", l_error_message);
++            log_it(L_INFO, "Can't delete NULL line %s", l_error_message);
+             dap_db_driver_sqlite_free(l_error_message);
+             l_error_message = NULL;
+         }
